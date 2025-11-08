@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='UTF-8' />
+  <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+  <title>Zuri Vogue Boutique</title>
+  <style>
+    :root{
+      --cream:#f6efe2;
+      --blush:#f7d6d4;
+      --gold:#d4af37;
+      --text:#2b2b2b;
+      --muted:#6c5a4a;
+      --bg: #ffffff;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;height:100%}
+    body{font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Arial; color:var(--text); background:var(--bg); line-height:1.6}
+    a{color:inherit; text-decoration:none}
+
+    /* Global helpers */
+    .container{max-width:1100px; margin:0 auto; padding:0 24px}
+    .section{padding:72px 0}
+    .section + .section{border-top:1px solid #f0e4d0}
+
+    /* Navigation */
+    header{position:sticky; top:0; z-index:100; background: rgba(255,255,255,.95); backdrop-filter: saturate(1.2) blur(6px); border-bottom:1px solid #f0e4d0}
+    .nav{display:flex; align-items:center; justify-content:space-between; padding:14px 0}
+    .brand{display:flex; align-items:center; gap:12px; font-weight:700; font-size:1.1rem}
+    .brand .logo{width:38px; height:38px; border-radius:9px; background: linear-gradient(135deg, var(--cream), var(--blush)); display:flex; align-items:center; justify-content:center; box-shadow:0 2px 6px rgba(0,0,0,.05)}
+    .nav-actions{display:flex; gap:8px; align-items:center}
+    .nav-btn{border:0; background:#fff; padding:10px 14px; border-radius:999px; cursor:default; color:var(--muted); font-weight:500}
+
+    /* Hero */
+    .hero{position:relative; overflow:hidden; min-height:78vh; display:flex; align-items:stretch;}
+    .hero-img{width:100%; height:100%; object-fit:cover; filter:saturate(1.05) brightness(0.98)}
+    .hero-overlay{position:absolute; inset:0; background: linear-gradient(to bottom, rgba(255,255,255,.0) 0%, rgba(0,0,0,.05) 55%, rgba(0,0,0,.08) 100%)}
+    .hero-content{position:absolute; left:0; right:0; bottom:0; padding:40px 0;}
+    .hero-content .inner{max-width:640px; padding:0 24px;}
+    .badge{display:inline-flex; align-items:center; padding:8px 12px; border-radius:999px; background: rgba(212,175,55,.15); color:#7a5a00; font-weight:600; font-size:0.8rem; border:1px solid rgba(212,175,55,.35)}
+    h1{font-size: clamp(2rem, 4vw + 1rem, 3.6rem); line-height:1.08; margin:12px 0 16px; font-weight:800; letter-spacing:.2px}
+    p{color:#533f2f; font-size:1.05rem; max-width:640px}
+    .cta{margin-top:18px; display:flex; gap:12px; align-items:center; flex-wrap:wrap}
+    .btn{border:0; padding:14px 22px; border-radius:12px; font-weight:700; cursor:default; background: #fff; color:#2b2b2b; box-shadow:0 6px 16px rgba(0,0,0,.05)}
+    .btn.primary{background: var(--gold); color:white; box-shadow:0 6px 16px rgba(212,175,55,.4)}
+    .wa-btn{display:inline-flex; align-items:center; gap:8px; padding:12px 14px; border-radius:999px; border:1px solid #e6c28a; background:#fff; color:#2b2b2b; font-weight:600; cursor:default}
+    .sr{position:absolute; left:-9999px;}
+
+    /* Sections styling */
+    h2{font-size:1.9rem; margin:0 0 14px}
+    .lead{color:#6b4f2a; font-size:1.05rem}
+
+    /* Featured Collections */
+    .grid{display:grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap:20px}
+    .card{border-radius:14px; overflow:hidden; background:#fff; box-shadow:0 6px 18px rgba(0,0,0,.05); border:1px solid #f0e3c9}
+    .card img{width:100%; height:170px; object-fit:cover; display:block}
+    .card-title{padding:12px; font-weight:700; text-align:center}
+
+    /* Testimonials */
+    .testimonials{display:grid; grid-template-columns:repeat(auto-fill, minmax(260px,1fr)); gap:20px}
+    .testi{background:#fff; padding:18px; border-radius:12px; border:1px solid #f0e3c9; box-shadow:0 6px 18px rgba(0,0,0,.04)}
+    .name{font-weight:700; margin-top:8px}
+
+    /* FAQ */
+    details{border:1px solid #f0e3c9; border-radius:10px; padding:6px 10px; margin-bottom:10px; background:#fff}
+    summary{font-weight:700; cursor:pointer}
+    details[open]{border-bottom:2px solid var(--gold)}
+    .faq-content{ padding:6px 4px; color:#533f2f }
+
+    /* Contact */
+    .contact{display:grid; grid-template-columns:1fr 1fr; gap:20px}
+    .contact .block{padding:14px; border-radius:12px; background:#fff; border:1px solid #f0e3c9}
+
+    /* Footer */
+    footer{padding:28px 0; color:#6b5a4a; font-size:.95rem}
+    .social{display:flex; gap:12px; align-items:center}
+    .social button{width:34px; height:34px; border-radius:50%; border:1px solid #e8d6bf; background:#fff; cursor:default}
+
+    /* Floating WhatsApp Button (region: Africa) */
+    .wa-float{position:fixed; right:20px; bottom:20px; width:58px; height:58px; border-radius:50%; background:#25D366; border:none; display:flex; align-items:center; justify-content:center; color:#fff; box-shadow:0 8px 16px rgba(0,0,0,.15); cursor:default}
+    .wa-float svg{ width:28px; height:28px; fill:#fff }
+
+    @media (max-width: 900px){
+      .contact{grid-template-columns:1fr}
+      .hero{min-height:60vh}
+    }
+  </style>
+</head>
+<body>
+  <!-- Floating WhatsApp Button – Africa region -->
+  <button class='wa-float' aria-label='Chat with us on WhatsApp' data-wa-link='https://wa.me/1234567890' title='WhatsApp chat'>
+    <svg viewBox='0 0 32 32' aria-hidden='true'><path d='M16 2C9.373 2 4 7.373 4 14c0 3.19 1.25 6.096 3.31 8.252l-1.7 5.773 5.759-1.66A11.93 11.93 0 0 0 16 24c6.627 0 12-5.373 12-12S22.627 2 16 2zm0 20a7.999 7.999 0 0 1-6.083-2.627l-.439-.524-3.722 1.136.515-3.638-.521-.856A8 8 0 1 1 16 22z'/></svg>
+  </button>
+
+  <!-- Navigation -->
+  <header>
+    <div class='container nav' aria-label='Main navigation'>
+      <div class='brand' role='img' aria-label='Zuri Vogue Boutique'>
+        <div class='logo' aria-hidden='true'></div>
+        <span>Zuri Vogue Boutique</span>
+      </div>
+      <nav class='nav-actions' aria-label='Primary navigation'>
+        <button class='nav-btn' aria-label='Home'>Home</button>
+        <button class='nav-btn' aria-label='About'>About</button>
+        <button class='nav-btn' aria-label='Collections'>Collections</button>
+        <button class='nav-btn' aria-label='Reviews'>Reviews</button>
+        <button class='nav-btn' aria-label='FAQ'>FAQ</button>
+        <button class='nav-btn' aria-label='Contact'>Contact</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class='hero' aria-label='Hero'>
+    <img class='hero-img' src='https://im.runware.ai/image/ws/2/ii/211d5b57-2461-4d0b-bf78-9d3d0fd1a6bc.jpg' alt='Elegant Nairobi fashion featuring Ankara dress' />
+    <div class='hero-overlay' aria-hidden='true'></div>
+    <div class='hero-content container'>
+      <div class='inner'>
+        <span class='badge'>Where African Elegance Meets Modern Style</span>
+        <h1>Where African Elegance Meets Modern Style</h1>
+        <p>Zuri Vogue Boutique blends traditional African prints with contemporary silhouettes. Locally sourced and handmade by talented Kenyan designers to celebrate confidence, femininity, and timeless style.</p>
+        <div class='cta'>
+          <button class='btn primary' aria-label='Shop the Collection'>Shop the Collection</button>
+          <button class='wa-btn' aria-label='Chat on WhatsApp' data-wa-link='https://wa.me/1234567890'>
+            <svg width='16' height='16' viewBox='0 0 24 24' aria-hidden='true' fill='currentColor'><path d='M20.5 3h-17A1.5 1.5 0 0 0 2 4.5v15A1.5 1.5 0 0 0 3.5 21H20l-1.5-4h2l-1-3h-2l-.5-2H21l-3-4H9L8 5H6l-1-2h15l1 2h0z'/></svg>
+            Chat via WhatsApp
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About / Story -->
+  <section class='section' aria-label='About Us'>
+    <div class='container'>
+      <h2>About Zuri Vogue Boutique</h2>
+      <p class='lead'>Zuri Vogue Boutique is a Nairobi-based female-wear brand that artfully blends traditional African prints with modern fashion trends. We celebrate confidence and femininity through locally sourced, handmade pieces crafted by talented Kenyan designers. Each item tells a story of craftsmanship, color, and culture—designed for women aged 20–45 who crave standout style with a soul of Africa.</p>
+    </div>
+  </section>
+
+  <!-- Featured Collections -->
+  <section class='section' aria-label='Featured Collections'>
+    <div class='container'>
+      <h2>Featured Collections</h2>
+      <p class='lead' style='margin-top:6px;'>Explore our categories crafted for every occasion.</p>
+      <div class='grid' style='margin-top:18px;'>
+        <div class='card' aria-label='Dresses'>
+          <img src='https://im.runware.ai/image/ws/2/ii/542037f8-ae2f-4180-8475-274e93e17d9c.jpg' alt='Dresses collection'/>
+          <div class='card-title'>Dresses</div>
+        </div>
+        <div class='card' aria-label='Tops'>
+          <img src='https://im.runware.ai/image/ws/2/ii/16b209a6-463d-4c53-adf5-ca4a1363a416.jpg' alt='Tops collection'/>
+          <div class='card-title'>Tops</div>
+        </div>
+        <div class='card' aria-label='Handbags'>
+          <img src='https://im.runware.ai/image/ws/2/ii/0f34d67b-1ae3-468b-a2c0-39ac1e9cdc17.jpg' alt='Handbags collection'/>
+          <div class='card-title'>Handbags</div>
+        </div>
+        <div class='card' aria-label='Footwear'>
+          <img src='https://im.runware.ai/image/ws/2/ii/67e473cd-22e7-46ea-b56e-5161c4abf879.jpg' alt='Footwear collection'/>
+          <div class='card-title'>Footwear</div>
+        </div>
+        <div class='card' aria-label='Accessories'>
+          <img src='https://im.runware.ai/image/ws/2/ii/e6d18d32-222a-4926-a4b4-351be4bb9ab0.jpg' alt='Accessories collection'/>
+          <div class='card-title'>Accessories</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Customer Reviews -->
+  <section class='section' aria-label='Customer Reviews'>
+    <div class='container'>
+      <h2>What our customers say</h2>
+      <div class='testimonials' style='margin-top:12px;'>
+        <div class='testi' aria-label='Testimonial'>
+          <p>Absolutely loved my Ankara dress! Got so many compliments.</p>
+          <div class='name'>Wanjiku M.</div>
+        </div>
+        <div class='testi' aria-label='Testimonial'>
+          <p>Stunning quality and the fabrics feel premium. Delivery was swift.</p>
+          <div class='name'>Amina N.</div>
+        </div>
+        <div class='testi' aria-label='Testimonial'>
+          <p>The handmade details are gorgeous—color and fit are perfect.</p>
+          <div class='name'>Njeri W.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQs -->
+  <section class='section' aria-label='FAQs'>
+    <div class='container'>
+      <h2>FAQs</h2>
+      <div class='faq-wrap' style='margin-top:8px;'>
+        <details>
+          <summary>Do you ship outside Kenya?</summary>
+          <div class='faq-content'>Yes, we ship to most African countries and globally.</div>
+        </details>
+        <details>
+          <summary>What’s your return policy?</summary>
+          <div class='faq-content'>Items can be returned within 7 days if unworn and in original packaging.</div>
+        </details>
+        <details>
+          <summary>Do you have a physical store?</summary>
+          <div class='faq-content'>Yes, we’re located at Westgate Mall, Nairobi.</div>
+        </details>
+        <details>
+          <summary>Do you accept M-Pesa?</summary>
+          <div class='faq-content'>Absolutely. We accept M-Pesa, debit cards, and PayPal.</div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class='section' aria-label='Contact'>
+    <div class='container'>
+      <h2>Contact</h2>
+      <div class='contact' style='margin-top:8px;'>
+        <div class='block' aria-label='WhatsApp contact'>
+          <strong>WhatsApp</strong>
+          <p style='margin:6px 0 0;'>Chat with us for styling advice, orders, and availability.</p>
+          <button class='wa-btn' aria-label='Open WhatsApp chat (non-functional)' data-wa-link='https://wa.me/1234567890' style='margin-top:6px;'>Chat on WhatsApp</button>
+        </div>
+        <div class='block' aria-label='Store location and email'>
+          <strong>Store & Email</strong>
+          <p style='margin:6px 0;'>Westgate Mall, Nairobi<br/>Email: hello@zurivogueboutique.co.ke</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer aria-label='Footer'>
+    <div class='container' style='display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:16px; padding:12px 0; border-top:1px solid #f0e3c9;'>
+      <div class='social' aria-label='Social links'>
+        <button aria-label='Instagram' title='Instagram'>
+          <svg width='20' height='20' viewBox='0 0 24 24'><path fill='#000' d='M12 2.2c3.2 0 3.6 0 4.8.07 1.15.06 1.92.25 2.36.42.56.25.96.55 1.38.97.42.42.72.82.97 1.38.18.44.36 1.21.42 2.36.07 1.2.07 1.6.07 4.8s0 3.6-.07 4.8c-.06 1.15-.24 1.92-.42 2.36-.25.56-.55.96-.97 1.38-.42.42-.82.72-1.38.97-.44.18-1.21.36-2.36.42-1.2.07-1.6.07-4.8.07s-3.6 0-4.8-.07c-1.15-.06-1.92-.24-2.36-.42-.56-.25-.96-.55-1.38-.97-.42-.42-.72-.82-.97-1.38-.18-.44-.36-1.21-.42-2.36C2.2 15.6 2.2 15.2 2.2 12s0-3.6.07-4.8c.06-1.15.24-1.92.42-2.36.25-.56.55-.96.97-1.38.42-.42.82-.72 1.38-.97.44-.18 1.21-.36 2.36-.42C8.4 2.2 8.8 2.2 12 2.2zm0 5.5a4.3 4.3 0 1 0 0 8.6 4.3 4.3 0 0 0 0-8.6zm0 7.1a2.8 2.8 0 1 1 0-5.6 2.8 2.8 0 0 1 0 5.6zm6.9-7.6a1 1 0 1 0 0-2 1 1 0 0 0 0 2z'/></svg>
+        </button>
+        <button aria-label='Facebook' title='Facebook'>
+          <svg width='20' height='20' viewBox='0 0 24 24'><path fill='#000' d='M22 12a10 10 0 1 0-11.5 9.95V14H8v-2h2.5V9.5C10.5 7 12.1 6 14.3 6c1.9 0 3.5.1 3.5.1v2h-2c-1 0-1.5.5-1.5 1.2V12h3l-.5 2h-2.5v7.95A10 10 0 0 0 22 12z'/></svg>
+        </button>
+        <button aria-label='TikTok' title='TikTok'>
+          <svg width='20' height='20' viewBox='0 0 24 24'><path fill='#000' d='M17 3h-3v4h-2V3H9v6h4v4h3V3z'/></svg>
+        </button>
+      </div>
+      <div style='font-size:.9rem;'>made with ❤️ by adorrable.dev</div>
+    </div>
+    <div class='container' style='text-align:left; padding-bottom:16px; opacity:.8;'>
+      <span style='font-weight:600;'>Proudly made in Kenya</span> — Designed with love by Zuri Vogue.
+    </div>
+  </footer>
+
+  <!-- Non-functional placeholders with user feedback -->
+  <div id='demo-toast' aria-live='polite' style='position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:#333; color:#fff; padding:12px 16px; border-radius:8px; font-family:inherit; font-size:14px; opacity:0; transition:opacity .3s ease; z-index:999;'></div>
+
+  <!-- Minimal JS to make all buttons trigger a placeholder click feedback -->
+  <script>
+    (function(){
+      var toast = document.getElementById('demo-toast');
+      function showToast(msg){
+        toast.textContent = msg;
+        toast.style.opacity = '1';
+        if (showToast._t) clearTimeout(showToast._t);
+        showToast._t = setTimeout(function(){ toast.style.opacity = '0'; }, 1800);
+      }
+      document.addEventListener('click', function(e){
+        var btn = e.target.closest('button');
+        if(!btn) return;
+        e.preventDefault();
+        showToast('This is a placeholder button');
+      });
+    })();
+  </script>
+
+  <!-- No external scripts; CTAs remain placeholders as per production-ready demo -->
+</body>
+</html>
